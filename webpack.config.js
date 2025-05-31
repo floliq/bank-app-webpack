@@ -71,9 +71,9 @@ module.exports = (env) => ({
       filename: 'main.[contenthash].css',
     }),
     new ESLintPlugin({
-      extensions: ['js'],  // Проверять только .js файлы
-      fix: true,          // Автоисправление простых ошибок
-      failOnError: true,  // Останавливать сборку при ошибках
+      extensions: ['js'], // Проверять только .js файлы
+      fix: true, // Автоисправление простых ошибок
+      failOnError: true, // Останавливать сборку при ошибках
     }),
   ],
   devServer: {
