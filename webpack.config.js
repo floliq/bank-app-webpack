@@ -1,38 +1,39 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const autoprefixer = require("autoprefixer");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const path = require("path");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
+const path = require('path');
 
 module.exports = (env) => ({
-  entry: "./src/index.js",
+  entry: './src/index.js',
   output: {
-    filename: "main.[contenthash].js",
-    path: path.resolve(__dirname, "dist"),
+    filename: 'main.[contenthash].js',
+    path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
-  devtool: "inline-source-map",
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
         test: /\.(?:js|mjs|cjs)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            targets: "defaults",
-            presets: [["@babel/preset-env"]],
+            targets: 'defaults',
+            presets: [['@babel/preset-env']],
           },
         },
       },
       {
         test: /\.s[ac]ss$/i,
         use: [
-          env && env.prod ? MiniCssExtractPlugin.loader : "style-loader",
+          env && env.prod ? MiniCssExtractPlugin.loader : 'style-loader',
           {
-            loader: "css-loader",
+            loader: 'css-loader',
           },
           {
-            loader: "postcss-loader",
+            loader: 'postcss-loader',
             options: {
               postcssOptions: {
                 plugins: [autoprefixer],
@@ -40,14 +41,14 @@ module.exports = (env) => ({
             },
           },
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
               sassOptions: {
                 silenceDeprecations: [
-                  "mixed-decls",
-                  "color-functions",
-                  "global-builtin",
-                  "import",
+                  'mixed-decls',
+                  'color-functions',
+                  'global-builtin',
+                  'import',
                 ],
               },
             },
@@ -56,18 +57,23 @@ module.exports = (env) => ({
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: "asset/resource",
+        type: 'asset/resource',
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: "asset/resource",
+        type: 'asset/resource',
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: "main.[contenthash].css",
+      filename: 'main.[contenthash].css',
+    }),
+    new ESLintPlugin({
+      extensions: ['js'],  // Проверять только .js файлы
+      fix: true,          // Автоисправление простых ошибок
+      failOnError: true,  // Останавливать сборку при ошибках
     }),
   ],
   devServer: {
