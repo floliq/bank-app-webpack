@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const autoprefixer = require("autoprefixer");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
 
@@ -7,7 +8,9 @@ module.exports = (env) => ({
   output: {
     filename: "main.[contenthash].js",
     path: path.resolve(__dirname, "dist"),
+    clean: true,
   },
+  devtool: "inline-source-map",
   module: {
     rules: [
       {
@@ -24,9 +27,31 @@ module.exports = (env) => ({
       {
         test: /\.s[ac]ss$/i,
         use: [
-          env.prod ? MiniCssExtractPlugin.loader : "style-loader",
-          "css-loader",
-          "sass-loader",
+          env && env.prod ? MiniCssExtractPlugin.loader : "style-loader",
+          {
+            loader: "css-loader",
+          },
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [autoprefixer],
+              },
+            },
+          },
+          {
+            loader: "sass-loader",
+            options: {
+              sassOptions: {
+                silenceDeprecations: [
+                  "mixed-decls",
+                  "color-functions",
+                  "global-builtin",
+                  "import",
+                ],
+              },
+            },
+          },
         ],
       },
       {
@@ -48,5 +73,6 @@ module.exports = (env) => ({
   devServer: {
     historyApiFallback: true,
     hot: true,
+    port: 8080,
   },
 });
