@@ -1,0 +1,9 @@
+@import '../../variables';
+
+.header {
+  &__main {
+    color: $white;
+    font-weight: 300;
+    font-size: 48px;
+  }
+}

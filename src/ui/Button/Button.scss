@@ -1,0 +1,15 @@
+@import "../../variables";
+
+.button {
+  padding: 14px 21px;
+  background-color: $primary;
+  border-radius: 7px;
+  border: none;
+  outline: none;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 143%;
+  text-align: center;
+  color: $white;
+}
