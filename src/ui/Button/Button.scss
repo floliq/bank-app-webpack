@@ -1,8 +1,9 @@
 @import "../../variables";
 
+/* доделать hover focus activa */
 .button {
   padding: 14px 21px;
-  background-color: $primary;
+  background: $primary;
   border-radius: 7px;
   border: none;
   outline: none;
@@ -12,4 +13,13 @@
   line-height: 143%;
   text-align: center;
   color: $white;
+  transition: 0.3s ease;
+
+  &:focus {
+    background: $primary, rgba($white, 0.3);
+  }
+
+  &:active {
+    background: $primary, rgba($black, 0.3);
+  }
 }

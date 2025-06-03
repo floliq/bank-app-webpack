@@ -9,4 +9,11 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
+  transition: 0.3s ease;
+  outline: none;
+
+  &:focus, &:hover {
+    border-color: $primary;
+    background-color: rgba($info, 0.1);
+  }
 }

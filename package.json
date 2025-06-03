@@ -50,6 +50,7 @@
     "lodash": "^4.17.21",
     "navigo": "^8.11.1",
     "normalize.css": "^8.0.1",
-    "redom": "^4.3.0"
+    "redom": "^4.3.0",
+    "validator": "^13.15.15"
   }
 }

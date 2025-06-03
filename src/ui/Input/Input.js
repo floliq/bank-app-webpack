@@ -6,11 +6,13 @@ export const Input = ({
   id = '',
   className = '',
   placeholder = '',
+  required = false
 }) => {
   return el('input', {
     className: `input ${className}`,
     type,
     id,
     placeholder,
+    required
   });
 };
