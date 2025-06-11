@@ -1,5 +1,6 @@
 export const auth = async (login, password) => {
-  const response = await fetch('http://localhost:3000/login', {
+  // eslint-disable-next-line no-undef
+  const response = await fetch(`${process.env.API_URL}/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -16,4 +17,8 @@ export const auth = async (login, password) => {
   }
 
   return data;
+};
+
+export const getToken = () => {
+  return localStorage.getItem('token');
 };

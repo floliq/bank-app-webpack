@@ -35,4 +35,8 @@
     text-align: right;
     color: $secondary;
   }
+
+  &__btn .button-text {
+    font-size: 14px;
+  }
 }

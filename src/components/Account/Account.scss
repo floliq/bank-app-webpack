@@ -1,0 +1,32 @@
+@import '../../variables';
+
+.account {
+  box-shadow: 0 5px 20px 0 rgba($black, 0.25);
+  background: $white;
+
+  &__title {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 122%;
+    color: $secondary;
+  }
+
+  &__balance {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 143%;
+    color: $secondary;
+  }
+
+  &__transaction {
+    font-weight: 700;
+    font-size: 13px;
+    color: $black;
+  }
+
+  &__date {
+    font-size: 13px;
+    color: $black;
+  }
+}

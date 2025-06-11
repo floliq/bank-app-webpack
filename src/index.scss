@@ -1,5 +1,6 @@
 @import 'normalize.css';
 @import 'variables';
+@import "skeleton-screen-css";
 @import 'bootstrap/scss/bootstrap';
 
 @font-face {
@@ -103,6 +104,16 @@ body {
 
 a {
   text-decoration: none;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+p {
+  margin: 0;
 }
 
 main {

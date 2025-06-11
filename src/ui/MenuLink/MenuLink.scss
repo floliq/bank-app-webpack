@@ -1,0 +1,41 @@
+@import '../../variables';
+
+.menu-link {
+  padding: 16px 24px;
+  background: $white;
+  border-radius: 7px;
+  border: 2px solid $primary;
+  outline: none;
+  transition: 0.3s ease;
+
+  &__text {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 125%;
+    text-align: center;
+    color: $primary;
+  }
+
+  &__bg {
+    border-radius: 7px;
+    transition: 0.3s ease;
+  }
+
+  &:focus,
+  &:hover,
+  &:active,
+  &.active {
+    background: $primary;
+  }
+
+  &:focus &__bg,
+  &:hover &__bg,
+  &.active &__bg {
+    background: rgba($white, 0.3);
+  }
+
+  &:active &__bg {
+    background: rgba($white, 0.8);
+  }
+}

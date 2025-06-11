@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 const path = require('path');
 
 module.exports = (env) => ({
@@ -66,14 +67,15 @@ module.exports = (env) => ({
     ],
   },
   plugins: [
+    new Dotenv(),
     new HtmlWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'main.[contenthash].css',
     }),
     new ESLintPlugin({
-      extensions: ['js'], // Проверять только .js файлы
-      fix: true, // Автоисправление простых ошибок
-      failOnError: true, // Останавливать сборку при ошибках
+      extensions: ['js'],
+      fix: true,
+      failOnError: true,
     }),
   ],
   devServer: {

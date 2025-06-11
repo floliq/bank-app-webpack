@@ -1,0 +1,16 @@
+@import '../../variables';
+
+.select-container {
+  width: 300px;
+}
+
+
+.ts-wrapper.single .ts-control,
+.ts-wrapper.single .ts-control input::placeholder {
+  color: $dark;
+}
+
+.focus .ts-control{
+    box-shadow: none;
+    border-color: $primary;
+}

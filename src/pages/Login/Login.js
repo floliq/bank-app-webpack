@@ -2,11 +2,11 @@
 import validator from 'validator';
 import { Button } from '../../ui/Button/Button';
 import { Input } from '../../ui/Input/Input';
-import './Main.scss';
+import './Login.scss';
 import { el, setAttr, setChildren } from 'redom';
 import { auth } from '../../api/Auth';
 
-const getAuthError = (response) => {
+const getAuthData = (response) => {
   console.log(response);
   if (response.error) {
     switch (response.error) {
@@ -29,13 +29,13 @@ const validate = (text) => {
   return validator.isLength(text, { min: 6, max: 256 }) && !text.includes(' ');
 };
 
-const Main = () => {
+const Login = (router) => {
   const main = el('div.auth.container.position-relative');
   const form = el(
     'form.auth__form.position-absolute.top-50.start-50.py-5.px-5.d-flex.flex-column'
   );
   const group = el('div.auth__group.position-relative');
-  const title = el('h2', { className: 'auth__title mb-4' }, 'Вход в аккаунт');
+  const title = el('h2.auth__title.mb-4', 'Вход в аккаунт');
 
   const errorText = el('p.auth__error.position-absolute.text-danger');
 
@@ -80,8 +80,8 @@ const Main = () => {
 
   function resetFields() {
     errorText.innerText = '';
-    loginInput.classList.add('border-danger');
-    passwordInput.classList.add('border-danger');
+    loginInput.classList.remove('border-danger');
+    passwordInput.classList.remove('border-danger');
   }
 
   form.addEventListener('submit', async (e) => {
@@ -104,12 +104,13 @@ const Main = () => {
 
     try {
       const responce = await auth(login, password);
-      const { message, isAuth, payload } = getAuthError(responce);
+      const { message, isAuth, payload } = getAuthData(responce);
       if (!isAuth) {
         errorText.innerText = message;
         return;
       }
-      console.log('Успешнаяы авторизация', payload);
+      localStorage.setItem('token', payload.token);
+      router.navigate('/accounts');
     } catch (error) {
       errorText.textContent = error.message;
     }
@@ -118,4 +119,4 @@ const Main = () => {
   return main;
 };
 
-export default Main;
+export default Login;

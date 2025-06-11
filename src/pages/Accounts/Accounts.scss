@@ -1,0 +1,12 @@
+@import '../../variables';
+@import 'tom-select/dist/css/tom-select.bootstrap5';
+
+
+.accounts {
+  &__title {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 700;
+    font-size: 34px;
+    color: $black;
+  }
+}

@@ -1,18 +1,16 @@
 import { el, setChildren } from 'redom';
-import './Button.scss';
+import './LinkButton.scss'
 
-export const Button = ({
+export const LinkButton = ({
   text = '',
-  type = 'button',
+  href = '/',
   className = '',
-  onClick = null,
   icon = null
 }) => {
   const btn = el(
-    `button.button.position-relative.${className}.d-flex.align-items-center`,
+    `a.button.position-relative.${className}.d-flex.align-items-center`,
     {
-      type,
-      onclick: onClick,
+      href
     }
   );
 
@@ -34,3 +32,5 @@ export const Button = ({
 
   return btn;
 };
+
+export default LinkButton;
