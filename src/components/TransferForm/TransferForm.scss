@@ -1,0 +1,25 @@
+@import '../../variables';
+
+.transfer-form {
+  background-color: $light-gray;
+  border-radius: 50px;
+
+  &__label {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 125%;
+    color: $secondary;
+  }
+
+  &__input {
+    max-width: 300px;
+  }
+
+  &__error {
+    top: 4px;
+    left: 50%;
+    font-size: 12px;
+    text-align: center;
+  }
+}

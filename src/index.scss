@@ -1,6 +1,6 @@
 @import 'normalize.css';
 @import 'variables';
-@import "skeleton-screen-css";
+@import 'skeleton-screen-css';
 @import 'bootstrap/scss/bootstrap';
 
 @font-face {
@@ -125,4 +125,16 @@ main {
   padding-top: 120px;
   width: 100%;
   height: 100%;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 34px;
+  color: $black;
+}
+
+.subtitle {
+  font-weight: 700;
+  font-size: 20px;
+  color: $black;
 }

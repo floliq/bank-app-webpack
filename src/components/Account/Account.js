@@ -9,7 +9,7 @@ const Account = (account, balance, date, router) => {
   const accountContent = el('div.account.d-flex.flex-column.p-4');
 
   const title = el('h3.account__title.mb-2', account);
-  const balanceText = el('p.account__balance.mb-2', `${balance} ₽`);
+  const balanceText = el('p.account__balance.mb-2', `${balance.toLocaleString('ru-RU')} ₽`);
 
   const cardBottom = el(
     'div.account__bottom.d-flex.justify-content-between.align-items-end'

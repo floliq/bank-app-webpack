@@ -7,12 +7,14 @@ class Select {
     options = {},
     placeholder = '',
     id = '',
+    search = false,
     onChange = () => {},
   }) {
     this.options = options;
     this.placeholder = placeholder;
     this.id = id || `select-${Math.random().toString(36).substr(2, 9)}`;
     this.onChange = onChange;
+    this.search = search;
 
     this.select = el('select', { id: this.id });
     this.container = el('div.select-container', this.select);
@@ -33,17 +35,11 @@ class Select {
 
     this.tomSelectInstance = new TomSelect(this.select, {
       placeholder: this.placeholder,
-      controlInput: null,
-      onInitialize: () => {
-        // Добавляем плейсхолдер через кастомный элемент
-        const placeholderEl = document.createElement('span');
-        placeholderEl.className = 'select-placeholder';
-        placeholderEl.textContent = this.placeholder;
-        this.container.querySelector('.ts-control').prepend(placeholderEl);
-      },
+      searchField: this.search ? ['text'] : [],
       onChange: (value) => {
         this.onChange(value);
-        this.container.querySelector('.select-placeholder')?.remove();
+        const controlInput = this.container.querySelector('.ts-control input');
+        controlInput?.remove();
       },
     });
   }

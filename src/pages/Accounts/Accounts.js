@@ -21,7 +21,7 @@ const Accounts = (router) => {
 
   const pageTop = el('div.accounts__top.d-flex.justify-content-between.mb-5');
   const pageMain = el('div.accounts__main.d-flex.align-items-center');
-  const title = el('h2.accounts__title.me-5', 'Ваши счета');
+  const title = el('h2.title.accounts__title.me-5', 'Ваши счета');
 
   const filterSelect = new Select({
     options: selectOptions,
@@ -90,7 +90,7 @@ const Accounts = (router) => {
 
       const response = await getAccounts();
 
-      if (response && (response.success || response.payload)) {
+      if (response && (response.payload)) {
         accountsData = response.payload;
         renderAccounts(accountsData);
       } else {
@@ -135,7 +135,7 @@ const Accounts = (router) => {
     try {
       const response = await createAccount();
 
-      if (!response.success) {
+      if (response.error) {
         throw new Error('Не удалось создать счет');
       }
 

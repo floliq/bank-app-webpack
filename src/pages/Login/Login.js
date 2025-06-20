@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import validator from 'validator';
 import { Button } from '../../ui/Button/Button';
 import { Input } from '../../ui/Input/Input';
@@ -7,7 +6,6 @@ import { el, setAttr, setChildren } from 'redom';
 import { auth } from '../../api/Auth';
 
 const getAuthData = (response) => {
-  console.log(response);
   if (response.error) {
     switch (response.error) {
     case 'Invalid password':
@@ -88,19 +86,22 @@ const Login = (router) => {
     e.preventDefault();
     const login = loginInput.value;
     const password = passwordInput.value;
+    let isError = false;
 
     resetFields();
     if (!validate(login)) {
       errorText.innerText = 'Логин: от 6 до 256 символов и без пробелов';
-      passwordInput.classList.remove('border-danger');
-      return;
+      loginInput.classList.add('border-danger');
+      isError = true;
     }
 
     if (!validate(password)) {
       errorText.innerText = 'Пароль: от 6 до 256 символов и без пробелов';
-      loginInput.classList.remove('border-danger');
-      return;
+      passwordInput.classList.add('border-danger');
+      isError = true;
     }
+
+    if (isError) return;
 
     try {
       const responce = await auth(login, password);

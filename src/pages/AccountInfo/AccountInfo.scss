@@ -1,0 +1,18 @@
+@import '../../variables';
+
+.account-page {
+  &__number {
+    font-weight: 400;
+    font-size: 34px;
+    color: $black;
+  }
+
+  &__balance {
+    font-size: 20px;
+    color: $black;
+
+    &-bold {
+      font-weight: 700;
+    }
+  }
+}

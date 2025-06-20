@@ -5,14 +5,12 @@ export const Button = ({
   text = '',
   type = 'button',
   className = '',
-  onClick = null,
   icon = null
 }) => {
   const btn = el(
     `button.button.position-relative.${className}.d-flex.align-items-center`,
     {
       type,
-      onclick: onClick,
     }
   );
 
@@ -24,7 +22,7 @@ export const Button = ({
   let iconElement;
 
   if (icon) {
-    iconElement = el('img.button-icon.me-1.position-relative.z-1', {
+    iconElement = el('img.button-icon.me-2.position-relative.z-1', {
       src: icon,
       alt: 'Картинка в кнопке'
     });

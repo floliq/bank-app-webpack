@@ -55,6 +55,11 @@ const Header = (router) => {
   setChildren(container, [menuMain, links]);
   setChildren(header, [container]);
 
+  menuMain.addEventListener('click', (e) => {
+    e.preventDefault();
+    router.navigate('/');
+  })
+
   return header;
 };
 

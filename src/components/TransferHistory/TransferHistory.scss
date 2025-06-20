@@ -1,0 +1,45 @@
+@import '../../variables';
+
+.transfer-history {
+  background-color: $light-gray;
+  border-radius: 50px;
+
+  &__thead {
+    background-color: $primary;
+  }
+
+  &__throw {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 120%;
+    color: $white !important;
+
+    &-first {
+      border-top-left-radius: 15px;
+      border-bottom-left-radius: 15px;
+    }
+    &-last {
+      border-top-right-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+  }
+
+  &__row {
+    border-bottom: 2px solid rgba(0, 82, 255, 0.1);;
+  }
+
+  &__tdata {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: $secondary;
+  }
+}
+
+.table > :not(caption) > * > * {
+  background-color: transparent;
+  border-color: transparent;
+  vertical-align: middle;
+}
