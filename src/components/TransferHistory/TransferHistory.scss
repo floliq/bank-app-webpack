@@ -26,7 +26,11 @@
   }
 
   &__row {
-    border-bottom: 2px solid rgba(0, 82, 255, 0.1);;
+    border-bottom: 2px solid rgba(0, 82, 255, 0.1);
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   &__tdata {

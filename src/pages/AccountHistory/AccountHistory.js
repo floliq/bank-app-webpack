@@ -1,13 +1,12 @@
 import { el, setChildren } from 'redom';
-import './AccountInfo.scss';
-import Back from '../../assets/images/back.svg';
-import TransferForm from '../../components/TransferForm/TransferForm';
-import ChartView from '../../components/ChartView/ChartView';
 import { getAccount } from '../../api/Accounts';
-import TransferHistory from '../../components/TransferHistory/TransferHistory';
 import LinkButton from '../../ui/LinkButton/LinkButton';
+import Back from '../../assets/images/back.svg';
+import ChartView from '../../components/ChartView/ChartView';
+import ChartDynamicView from '../../components/ChartDynamicVIew/ChartDynamicView';
+import TransferHistory from '../../components/TransferHistory/TransferHistory';
 
-const AccountInfo = async (router, id) => {
+const AccountHistory = async (router, id) => {
   const page = el('div.container.account-page.py-5');
   const errorText = el(
     'p.text-error',
@@ -24,7 +23,7 @@ const AccountInfo = async (router, id) => {
     const title = el('h2.title.account-page__title', 'Просмотр счёта');
     const backLink = LinkButton({
       text: 'Вернуться назад',
-      href: '/accounts',
+      href: `/accounts/${id}`,
       className: 'account-page__back',
       icon: Back,
     });
@@ -41,40 +40,22 @@ const AccountInfo = async (router, id) => {
     const balanceTitle = el('span.account-page__balance-bold.me-5', 'Баланс');
 
     const content = el('div.account__content');
-    const row = el('div.row.mb-5');
-    const colOne = el('div.col-6.d-flex');
-    const colTwo = el('div.col-6');
-    const transferForm = await TransferForm(id, onUpdate);
-    let chart = ChartView(data, 6);
-    const historyContainer = el('div');
-    let history = TransferHistory(id, data.transactions, router, 10);
-    setChildren(historyContainer, [history]);
-
-    function onUpdate(newData) {
-      balance.textContent = `${newData.balance.toLocaleString('ru-RU')} ₽`;
-
-      const newHistory = TransferHistory(id, newData.transactions, router);
-      setChildren(historyContainer, [newHistory]);
-      history = newHistory;
-
-      const newChart = ChartView(newData, 6);
-      setChildren(colTwo, [newChart]);
-      chart = newChart;
-    }
+    const row = el('div.row');
+    const colOne = el('div.col-12.mb-5');
+    const colTwo = el('div.col-12.mb-5');
+    const chart = ChartView(data, 12);
+    const chartDynamic = ChartDynamicView(data, 12);
+    const history = TransferHistory(id, data.transactions, router)
 
     setChildren(accountTop, [title, backLink]);
     setChildren(money, [balanceTitle, balance]);
     setChildren(header, [number, money]);
-    setChildren(colOne, [transferForm]);
-    setChildren(colTwo, [chart]);
-    setChildren(row, [colOne, colTwo]);
-    setChildren(content, [row, historyContainer]);
-    setChildren(page, [accountTop, header, content]);
 
-    backLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      router.navigate('/accounts');
-    });
+    setChildren(colOne, [chart]);
+    setChildren(colTwo, [chartDynamic]);
+    setChildren(row, [colOne, colTwo]);
+    setChildren(content, [row, history]);
+    setChildren(page, [accountTop, header, content]);
 
     return page;
   } catch {
@@ -83,4 +64,4 @@ const AccountInfo = async (router, id) => {
   }
 };
 
-export default AccountInfo;
+export default AccountHistory;

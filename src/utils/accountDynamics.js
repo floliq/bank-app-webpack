@@ -27,7 +27,7 @@ const getMonthBalance = (account, monthTransactions, initialBalance) => {
   return monthBalance;
 };
 
-export const getBalanceDynamic = (data) => {
+export const getBalanceDynamic = (data, months) => {
   let balance = data.balance;
   const account = data.account;
   const transactions = data.transactions;
@@ -36,7 +36,7 @@ export const getBalanceDynamic = (data) => {
 
   const currentDate = new Date();
 
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < months; i++) {
     const monthStart = new Date(
       currentDate.getFullYear(),
       currentDate.getMonth() - i,
@@ -62,7 +62,55 @@ export const getBalanceDynamic = (data) => {
   return { labels, values };
 };
 
-export const getLastTransactions = (transactions) => {
+export const getTransactionDynamic = (data, months) => {
+  const account = data.account;
+  const transactions = data.transactions;
+
+  const currentDate = new Date();
+
+  const labels = [];
+  const income = [];
+  const expense = [];
+
+  for (let i = 0; i < months; i++) {
+    const monthStart = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() - i,
+      1
+    );
+    const monthEnd = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() - i + 1,
+      0
+    );
+
+    const monthTransactions = transactions.filter((transaction) => {
+      const transactionDate = new Date(transaction.date);
+      return transactionDate >= monthStart && transactionDate <= monthEnd;
+    });
+
+    let monthlyIncome = 0;
+    let monthlyExpense = 0;
+
+    monthTransactions.forEach((transaction) => {
+      if (transaction.to === account) {
+        monthlyIncome += transaction.amount;
+      } else if (transaction.from === account) {
+        monthlyExpense += transaction.amount;
+      }
+    });
+
+    labels.unshift(monthOfTheYear[monthStart.getMonth()]);
+    income.unshift(monthlyIncome.toFixed(2));
+    expense.unshift(monthlyExpense.toFixed(2));
+  }
+
+  // TODO
+
+  return { labels, income, expense };
+};
+
+export const getLastTransactions = (transactions, count = null) => {
   let sortedTransactions = [...transactions];
 
   sortedTransactions = transactions.sort((a, b) => {
@@ -71,7 +119,9 @@ export const getLastTransactions = (transactions) => {
     return new Date(dateB) - new Date(dateA);
   });
 
-  sortedTransactions = sortedTransactions.slice(0, 10);
+  if (count) {
+    sortedTransactions = sortedTransactions.slice(0, count);
+  }
 
   return sortedTransactions;
 };

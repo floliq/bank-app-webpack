@@ -3,12 +3,12 @@ import Chart from 'chart.js/auto';
 import { el, setChildren } from 'redom';
 import { getBalanceDynamic } from '../../utils/accountDynamics';
 
-const ChartView = (data) => {
+const ChartView = (data, months = 6) => {
   const dynamic = el('div.dynamic.px-5.py-4');
   const title = el('h3.subtitle.dynamic__title.mb-2', 'Динамика баланса');
   const chart = el('canvas#chart.dynamic__canvas');
 
-  const { labels, values } = getBalanceDynamic(data);
+  const { labels, values } = getBalanceDynamic(data, months);
 
   const maxValue = Math.max(...values);
 
@@ -18,20 +18,17 @@ const ChartView = (data) => {
       labels: labels,
       datasets: [
         {
+          label: 'Баланс',
           data: values,
           backgroundColor: '#116ACC',
+          borderColor: '#116ACC',
+          borderWidth: 1,
         },
       ],
     },
     options: {
-      plugins: {
-        tooltip: {
-          enabled: false,
-        },
-        legend: {
-          display: false,
-        },
-      },
+      responsive: true,
+      maintainAspectRatio: false,
       scales: {
         y: {
           beginAtZero: false,

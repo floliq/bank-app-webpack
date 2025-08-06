@@ -5,10 +5,10 @@ import './index.scss';
 import Navigo from 'navigo';
 import Header from './components/Header/Header';
 import { getToken } from './api/Auth';
-
-const Login = () => import('./pages/Login/Login');
-const Accounts = () => import('./pages/Accounts/Accounts');
-const AccountInfo = () => import('./pages/AccountInfo/AccountInfo');
+import AccountHistory from './pages/AccountHistory/AccountHistory';
+import Login from './pages/Login/Login';
+import Accounts from './pages/Accounts/Accounts';
+import AccountInfo from './pages/AccountInfo/AccountInfo';
 
 const router = new Navigo('/');
 const currentPath = window.location.pathname;
@@ -34,20 +34,28 @@ router.on('/', () => {
   }
 });
 
-router.on('/login', async () => {
-  const module = await Login();
-  updateApp(module.default(router));
+router.on('/login', () => {
+  const page = Login(router);
+  updateApp(page);
 });
 
 router.on('/accounts', async () => {
-  const module = await Accounts();
-  updateApp(module.default(router));
+  const page = await Accounts(router);
+  updateApp(page);
 });
 
 router.on('/accounts/:id', async ({ data }) => {
   if (getToken()) {
-    const module = await AccountInfo();
-    const page = await module.default(router, data.id);
+    const page = await AccountInfo(router, data.id);
+    updateApp(page);
+  } else {
+    router.navigate('/login');
+  }
+});
+
+router.on('/accounts/:id/history', async ({ data }) => {
+  if (getToken()) {
+    const page = await AccountHistory(router, data.id);
     updateApp(page);
   } else {
     router.navigate('/login');
