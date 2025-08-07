@@ -1,0 +1,43 @@
+@import '../../variables';
+
+.changes {
+  &__dots {
+    &-up {
+      border-color: $success;
+    }
+
+    &-down {
+      border-color: $danger;
+    }
+  }
+  &__value {
+    position: relative;
+    padding-right: 15px;
+
+    &-up::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 5px solid $success;
+    }
+
+    &-down::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid $danger;
+    }
+  }
+}

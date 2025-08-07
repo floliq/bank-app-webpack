@@ -138,3 +138,34 @@ main {
   font-size: 20px;
   color: $black;
 }
+
+.box {
+  border-radius: 50px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+}
+
+.gray-box{
+  border-radius: 50px;
+  background-color: $light-gray;
+}
+
+.currency {
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: 0.1em;
+  color: $black;
+}
+
+.currency-value {
+  font-weight: 400;
+  font-size: 20px;
+  letter-spacing: 0.1em;
+  color: $black;
+}
+
+.dots {
+  flex-grow: 1;
+  border-bottom: 1px dotted $black;
+  margin-bottom: 3px;
+  min-width: 20px;
+}

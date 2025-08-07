@@ -8,16 +8,23 @@ class Select {
     placeholder = '',
     id = '',
     search = false,
+    className = '',
     onChange = () => {},
+    required = false
   }) {
     this.options = options;
     this.placeholder = placeholder;
     this.id = id || `select-${Math.random().toString(36).substr(2, 9)}`;
     this.onChange = onChange;
     this.search = search;
+    this.required = required;
 
-    this.select = el('select', { id: this.id });
-    this.container = el('div.select-container', this.select);
+    this.select = el('select', { 
+      id: this.id,
+      required: this.required
+    });
+    
+    this.container = el(`div.select-container${'.' + className}`, this.select);
 
     this.updateOptions(this.options);
 

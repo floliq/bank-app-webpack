@@ -69,7 +69,7 @@ const getRequestAnswer = (response) => {
   };
 };
 
-const validate = (value) => {
+export const validateDecimal = (value) => {
   return (
     validator.isFloat(value, { min: 0 }) &&
     validator.matches(value, /^\d+(\.\d{2})?$/)
@@ -159,7 +159,7 @@ const TransferForm = async (id, onUpdate) => {
       isError = true;
     }
 
-    if (!validate(amount)) {
+    if (!validateDecimal(amount)) {
       errorText.innerText =
         'Число должно быть положительное и 2 знака после запятой';
       amountInput.classList.add('border-danger');

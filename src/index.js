@@ -9,6 +9,7 @@ import AccountHistory from './pages/AccountHistory/AccountHistory';
 import Login from './pages/Login/Login';
 import Accounts from './pages/Accounts/Accounts';
 import AccountInfo from './pages/AccountInfo/AccountInfo';
+import Currencies from './pages/Currencies/Currencies';
 
 const router = new Navigo('/');
 const currentPath = window.location.pathname;
@@ -61,6 +62,11 @@ router.on('/accounts/:id/history', async ({ data }) => {
     router.navigate('/login');
   }
 });
+
+router.on('/currencies', async () => {
+  const page = await Currencies(router);
+  updateApp(page);
+})
 
 if (currentPath === '/') {
   if (getToken()) {

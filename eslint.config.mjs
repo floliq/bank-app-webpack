@@ -27,7 +27,7 @@ export default defineConfig([
   {
     files: ['**/*.{js,mjs,cjs}'],
     rules: {
-      'no-console': 'warn',
+      'no-console': ['warn', { allow: ['error'] }],
       'no-unused-vars': 'error',
       indent: ['error', 2],
       quotes: ['error', 'single'],
