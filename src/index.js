@@ -10,6 +10,7 @@ import Login from './pages/Login/Login';
 import Accounts from './pages/Accounts/Accounts';
 import AccountInfo from './pages/AccountInfo/AccountInfo';
 import Currencies from './pages/Currencies/Currencies';
+import ATMs from './pages/ATMs/ATMs';
 
 const router = new Navigo('/');
 const currentPath = window.location.pathname;
@@ -64,7 +65,12 @@ router.on('/accounts/:id/history', async ({ data }) => {
 });
 
 router.on('/currencies', async () => {
-  const page = await Currencies(router);
+  const page = await Currencies();
+  updateApp(page);
+})
+
+router.on('/atms', async () => {
+  const page = await ATMs();
   updateApp(page);
 })
 

@@ -3,8 +3,8 @@ import ProfileCurrencies from '../../components/ProfileCurrencies/ProfileCurrenc
 import ExchangeForm from '../../components/ExchangeForm/ExchangeForm';
 import CurrenciesChange from '../../components/CurrenciesChange/CurrenciesChange';
 import { getCurrencies } from '../../api/Currencies';
-// eslint-disable-next-line no-unused-vars
-const Currencies = async (router) => {
+ 
+const Currencies = async () => {
   const page = el('div.container.currencies.py-5');
   const errorText = el(
     'p.text-error',
