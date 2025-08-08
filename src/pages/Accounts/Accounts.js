@@ -1,11 +1,11 @@
-import { el, mount, setChildren } from 'redom';
+import { el, setChildren } from 'redom';
 import './Accounts.scss';
 import { createAccount, getAccounts } from '../../api/Accounts';
 import Account from '../../components/Account/Account';
 import Select from '../../ui/Select/Select';
 import { Button } from '../../ui/Button/Button';
 import Plus from '../../assets/images/plus.svg';
-import AccountsPageSkeleton from '../../ui/Skeletons/AccountsPageSkeleton/AccountsPageSkeleton';
+import AccountsPageSkeleton from '../../ui/Skeletons/AccountsSkeleton/AccountsPageSkeleton/AccountsPageSkeleton';
 
 const selectOptions = {
   '': 'Сортировка',
@@ -49,10 +49,33 @@ const Accounts = (router) => {
   setChildren(pageMain, [title, filterSelect]);
   setChildren(pageTop, [pageMain, addBtn]);
 
-  mount(page, pageTop);
-  mount(page, errorMessage);
-  generateAccounts();
+  // Show skeleton immediately
+  content.innerHTML = '';
+  AccountsPageSkeleton(content);
+  errorMessage.style.display = 'none';
+  errorMessage.textContent = '';
+
+  // Place initial layout
   setChildren(page, [pageTop, content, errorMessage]);
+
+  // Fetch and render content asynchronously; replace skeleton upon success
+  (async () => {
+    try {
+      const response = await getAccounts();
+
+      if (response && response.payload) {
+        accountsData = response.payload;
+        renderAccounts(accountsData);
+      } else {
+        throw new Error(response?.error || 'Неверный формат ответа сервера');
+      }
+    } catch {
+      content.innerHTML = '';
+      errorMessage.style.display = 'block';
+      errorMessage.textContent =
+        'Ошибка загрузки данных. Пожалуйста, попробуйте позже.';
+    }
+  })();
 
   const sortAccounts = (sortBy) => {
     if (!sortBy) return;
@@ -79,30 +102,6 @@ const Accounts = (router) => {
 
     renderAccounts(sortedAccounts);
   };
-
-  async function generateAccounts() {
-    try {
-      content.innerHTML = '';
-      AccountsPageSkeleton(content);
-
-      errorMessage.style.display = 'none';
-      errorMessage.textContent = '';
-
-      const response = await getAccounts();
-
-      if (response && response.payload) {
-        accountsData = response.payload;
-        renderAccounts(accountsData);
-      } else {
-        throw new Error(response?.error || 'Неверный формат ответа сервера');
-      }
-    } catch {
-      content.innerHTML = '';
-      errorMessage.style.display = 'block';
-      errorMessage.textContent =
-        'Ошибка загрузки данных. Пожалуйста, попробуйте позже.';
-    }
-  }
 
   const renderAccounts = (accounts) => {
     content.innerHTML = '';

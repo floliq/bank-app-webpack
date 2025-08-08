@@ -6,6 +6,7 @@ import ChartView from '../../components/ChartView/ChartView';
 import { getAccount } from '../../api/Accounts';
 import TransferHistory from '../../components/TransferHistory/TransferHistory';
 import LinkButton from '../../ui/LinkButton/LinkButton';
+import AccountInfoSkeleton from '../../ui/Skeletons/AccountInfoSkeleton/AccountInfoSkeleton';
 
 const AccountInfo = async (router, id) => {
   const page = el('div.container.account-page.py-5');
@@ -14,73 +15,77 @@ const AccountInfo = async (router, id) => {
     'Произошла ошибка, перезагрузите страницу'
   );
 
-  try {
-    const response = await getAccount(id);
-    const data = response.payload;
+  const accountTop = el(
+    'div.account-page__top.mb-4.d-flex.justify-content-between.align-items-end'
+  );
+  const title = el('h2.title.account-page__title', 'Просмотр счёта');
+  const backLink = LinkButton({
+    text: 'Вернуться назад',
+    href: '/accounts',
+    className: 'account-page__back',
+    icon: Back,
+  });
+  setChildren(accountTop, [title, backLink]);
 
-    const accountTop = el(
-      'div.account-page__top.mb-4.d-flex.justify-content-between.align-items-end'
-    );
-    const title = el('h2.title.account-page__title', 'Просмотр счёта');
-    const backLink = LinkButton({
-      text: 'Вернуться назад',
-      href: '/accounts',
-      className: 'account-page__back',
-      icon: Back,
-    });
+  const skeleton = AccountInfoSkeleton();
+  setChildren(page, [accountTop, skeleton]);
 
-    const header = el(
-      'div.account-page__header.d-flex.justify-content-between.align-items-end.mb-5'
-    );
-    const number = el('h3.account-page_number', `№ ${id}`);
-    const money = el('div.account-page__balance.d-flex');
-    const balance = el(
-      'p.account-page__balance',
-      `${response.payload.balance.toLocaleString('ru-RU')} ₽`
-    );
-    const balanceTitle = el('span.account-page__balance-bold.me-5', 'Баланс');
+  backLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    router.navigate('/accounts');
+  });
 
-    const content = el('div.account__content');
-    const row = el('div.row.mb-5');
-    const colOne = el('div.col-6.d-flex');
-    const colTwo = el('div.col-6');
-    const transferForm = await TransferForm(id, onUpdate);
-    let chart = ChartView(data, 6);
-    const historyContainer = el('div');
-    let history = TransferHistory(id, data.transactions, router, 10);
-    setChildren(historyContainer, [history]);
+  (async () => {
+    try {
+      const response = await getAccount(id);
+      const data = response.payload;
 
-    function onUpdate(newData) {
-      balance.textContent = `${newData.balance.toLocaleString('ru-RU')} ₽`;
+      const header = el(
+        'div.account-page__header.d-flex.justify-content-between.align-items-end.mb-5'
+      );
+      const number = el('h3.account-page_number', `№ ${id}`);
+      const money = el('div.account-page__balance.d-flex');
+      const balance = el(
+        'p.account-page__balance',
+        `${data.balance.toLocaleString('ru-RU')} ₽`
+      );
+      const balanceTitle = el('span.account-page__balance-bold.me-5', 'Баланс');
 
-      const newHistory = TransferHistory(id, newData.transactions, router);
-      setChildren(historyContainer, [newHistory]);
-      history = newHistory;
+      const content = el('div.account__content');
+      const row = el('div.row.mb-5');
+      const colOne = el('div.col-6.d-flex');
+      const colTwo = el('div.col-6');
 
-      const newChart = ChartView(newData, 6);
-      setChildren(colTwo, [newChart]);
-      chart = newChart;
+      const historyContainer = el('div');
+
+      function onUpdate(newData) {
+        balance.textContent = `${newData.balance.toLocaleString('ru-RU')} ₽`;
+
+        const newHistory = TransferHistory(id, newData.transactions, router);
+        setChildren(historyContainer, [newHistory]);
+
+        const newChart = ChartView(newData, 6);
+        setChildren(colTwo, [newChart]);
+      }
+
+      const transferForm = await TransferForm(id, onUpdate);
+      const chart = ChartView(data, 6);
+      const history = TransferHistory(id, data.transactions, router, 10);
+      setChildren(historyContainer, [history]);
+
+      setChildren(money, [balanceTitle, balance]);
+      setChildren(header, [number, money]);
+      setChildren(colOne, [transferForm]);
+      setChildren(colTwo, [chart]);
+      setChildren(row, [colOne, colTwo]);
+      setChildren(content, [row, historyContainer]);
+
+      setChildren(page, [accountTop, header, content]);
+    } catch {
+      setChildren(page, [errorText]);
     }
-
-    setChildren(accountTop, [title, backLink]);
-    setChildren(money, [balanceTitle, balance]);
-    setChildren(header, [number, money]);
-    setChildren(colOne, [transferForm]);
-    setChildren(colTwo, [chart]);
-    setChildren(row, [colOne, colTwo]);
-    setChildren(content, [row, historyContainer]);
-    setChildren(page, [accountTop, header, content]);
-
-    backLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      router.navigate('/accounts');
-    });
-
-    return page;
-  } catch {
-    setChildren(page, [errorText]);
-    return page;
-  }
+  })();
+  return page;
 };
 
 export default AccountInfo;
