@@ -24,7 +24,7 @@ const getRequestAnswer = (response) => {
       };
     case 'Invalid amount':
       return {
-        message: 'Не указана сумма перевода, или она отрицательнаят',
+        message: 'Не указана сумма перевода, или она отрицательная',
         success: false,
       };
     case 'Not enough currency':
@@ -166,9 +166,9 @@ const ExchangeForm = async (updateCurrencies) => {
         isError = true;
       }
 
-      if (!validateDecimal(amount)) {
-        errorText.innerText =
-          'Число должно быть положительное и 2 знака после запятой';
+      const normalizedAmount = amount.replace(',', '.');
+      if (!validateDecimal(normalizedAmount)) {
+        errorText.innerText = 'Число должно быть положительным и иметь 2 знака после запятой';
         amountInput.classList.add('border-danger');
         isError = true;
       }
@@ -176,7 +176,7 @@ const ExchangeForm = async (updateCurrencies) => {
       if (isError) return;
 
       try {
-        const responce = await buyCurrency(from, to, amount);
+        const responce = await buyCurrency(from, to, normalizedAmount);
         const { message, success, payload } = getRequestAnswer(responce);
         if (!success) {
           errorText.innerText = message;

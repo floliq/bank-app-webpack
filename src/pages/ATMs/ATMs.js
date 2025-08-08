@@ -13,7 +13,17 @@ const ATMs = async () => {
 
   setChildren(page, [title, mapContainer]);
 
-  initMap('atms-map');
+  let mapInstance = null;
+  initMap('atms-map').then((map) => {
+    mapInstance = map;
+  });
+
+  page.onunmount = () => {
+    if (mapInstance && mapInstance.destroy) {
+      mapInstance.destroy();
+      mapInstance = null;
+    }
+  };
 
   return page;
 };

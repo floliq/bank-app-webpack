@@ -69,7 +69,9 @@ module.exports = (env) => ({
   },
   plugins: [
     new Dotenv(),
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: './index.html',
+    }),
     new MiniCssExtractPlugin({
       filename: 'main.[contenthash].css',
     }),

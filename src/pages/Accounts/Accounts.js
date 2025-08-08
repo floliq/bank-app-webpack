@@ -90,15 +90,12 @@ const Accounts = (router) => {
 
       const response = await getAccounts();
 
-      if (response && (response.payload)) {
+      if (response && response.payload) {
         accountsData = response.payload;
         renderAccounts(accountsData);
       } else {
         throw new Error(response?.error || 'Неверный формат ответа сервера');
       }
-
-      accountsData = response.payload;
-      renderAccounts(accountsData);
     } catch {
       content.innerHTML = '';
       errorMessage.style.display = 'block';

@@ -18,9 +18,9 @@ const getMonthBalance = (account, monthTransactions, initialBalance) => {
 
   monthTransactions.forEach((transaction) => {
     if (transaction.from === account) {
-      monthBalance += transaction.amount;
-    } else if (transaction.to === account) {
       monthBalance -= transaction.amount;
+    } else if (transaction.to === account) {
+      monthBalance += transaction.amount;
     }
   });
 
@@ -104,8 +104,6 @@ export const getTransactionDynamic = (data, months) => {
     income.unshift(monthlyIncome.toFixed(2));
     expense.unshift(monthlyExpense.toFixed(2));
   }
-
-  // TODO
 
   return { labels, income, expense };
 };
