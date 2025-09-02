@@ -89,7 +89,7 @@ const ExchangeForm = async (updateCurrencies) => {
       placeholder: 'Из',
       id: 'exchange-from',
       search: true,
-      className: 'exchange__select',
+      className: 'exchange__select exchange__select-from',
     });
 
     const toSelect = new Select({
@@ -97,7 +97,7 @@ const ExchangeForm = async (updateCurrencies) => {
       placeholder: 'В',
       id: 'exchange-to',
       search: true,
-      className: 'exchange__select',
+      className: 'exchange__select exchange__select-to',
     });
 
     const amountLabel = el('label.exchange__label.me-2', 'Сумма');

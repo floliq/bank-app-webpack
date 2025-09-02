@@ -24,7 +24,6 @@ const Currencies = async () => {
 
       const initialResponse = await getCurrencies();
       let currentCurrencies = initialResponse.payload;
-
       const updateCurrencies = (newCurrencies) => {
         currentCurrencies = newCurrencies;
         profileCurrencies.update(currentCurrencies);

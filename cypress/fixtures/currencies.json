@@ -1,0 +1,7 @@
+{
+  "payload": {
+      "USD": {"amount": 100.0, "code": "USD"},
+      "EUR": {"amount": 50.0, "code": "EUR"},
+      "RUB": {"amount": 10000.0, "code": "RUB"}
+  }
+} 

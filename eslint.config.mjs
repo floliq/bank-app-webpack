@@ -22,7 +22,7 @@ export default defineConfig([
       },
     },
   },
-  globalIgnores(['dist', 'node_modules']),
+  globalIgnores(['dist', 'node_modules', 'cypress']),
   eslintConfigPrettier,
   {
     files: ['**/*.{js,mjs,cjs}'],

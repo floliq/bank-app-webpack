@@ -7,7 +7,9 @@
     "build": "webpack --mode=production --env prod",
     "dev": "webpack serve --mode=development ",
     "lint": "eslint . --config eslint.config.mjs",
-    "lint:fix": "eslint . --config eslint.config.mjs --fix"
+    "lint:fix": "eslint . --config eslint.config.mjs --fix",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "repository": {
     "type": "git",
@@ -28,6 +30,7 @@
     "autoprefixer": "^10.4.21",
     "babel-loader": "^10.0.0",
     "css-loader": "^7.1.2",
+    "cypress": "^14.5.4",
     "dotenv-webpack": "^8.1.0",
     "eslint": "^9.28.0",
     "eslint-config-prettier": "^10.1.5",
