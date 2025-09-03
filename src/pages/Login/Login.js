@@ -1,9 +1,9 @@
-import validator from 'validator';
 import { Button } from '../../ui/Button/Button';
 import { Input } from '../../ui/Input/Input';
 import './Login.scss';
 import { el, setAttr, setChildren } from 'redom';
 import { auth } from '../../api/Auth';
+import { validateAuth } from '../../utils/validation';
 
 const getAuthData = (response) => {
   if (response.error) {
@@ -21,10 +21,6 @@ const getAuthData = (response) => {
     isAuth: true,
     payload: response.payload,
   };
-};
-
-const validate = (text) => {
-  return validator.isLength(text, { min: 6, max: 256 }) && !text.includes(' ');
 };
 
 const Login = (router) => {
@@ -89,13 +85,13 @@ const Login = (router) => {
     let isError = false;
 
     resetFields();
-    if (!validate(login)) {
+    if (!validateAuth(login)) {
       errorText.innerText = 'Логин: от 6 до 256 символов и без пробелов';
       loginInput.classList.add('border-danger');
       isError = true;
     }
 
-    if (!validate(password)) {
+    if (!validateAuth(password)) {
       errorText.innerText = 'Пароль: от 6 до 256 символов и без пробелов';
       passwordInput.classList.add('border-danger');
       isError = true;

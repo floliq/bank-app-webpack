@@ -13,22 +13,7 @@ const monthOfTheYear = [
   'дек',
 ];
 
-const getMonthBalance = (account, monthTransactions, initialBalance) => {
-  let monthBalance = initialBalance;
-
-  monthTransactions.forEach((transaction) => {
-    if (transaction.from === account) {
-      monthBalance -= transaction.amount;
-    } else if (transaction.to === account) {
-      monthBalance += transaction.amount;
-    }
-  });
-
-  return monthBalance;
-};
-
 export const getBalanceDynamic = (data, months) => {
-  let balance = data.balance;
   const account = data.account;
   const transactions = data.transactions;
   const labels = [];
@@ -48,15 +33,23 @@ export const getBalanceDynamic = (data, months) => {
       0
     );
 
-    const monthTransactions = transactions.filter((transaction) => {
-      const transactionDate = new Date(transaction.date);
-      return transactionDate >= monthStart && transactionDate <= monthEnd;
+    const transactionsUpToMonthEnd = transactions.filter(
+      (transaction) => new Date(transaction.date) <= monthEnd
+    );
+
+    let monthBalance = 0;
+
+    transactionsUpToMonthEnd.forEach((transaction) => {
+      if (transaction.to === account) {
+        monthBalance += transaction.amount;
+      }
+      if (transaction.from === account) {
+        monthBalance -= transaction.amount;
+      }
     });
 
-    balance = getMonthBalance(account, monthTransactions, balance);
-
     labels.unshift(monthOfTheYear[monthStart.getMonth()]);
-    values.unshift(i !== 0 ? balance.toFixed(2) : data.balance);
+    values.unshift(monthBalance.toFixed(2));
   }
 
   return { labels, values };

@@ -14,11 +14,12 @@
 
 ### Установка
 ```bash
-npm ci   # либо npm install
+npm i   # либо npm install
 ```
 
 ### Тесты
 ```bash
+npm run test   # запуск тестов jest
 npm run cy:run   # запуск тестов cypress
 ```
 
@@ -45,6 +46,8 @@ npm run dev    # запуск dev-сервера (порт 8080), HMR, historyAp
 npm run build  # production-сборка в каталог dist
 npm run lint   # проверка ESLint
 npm run lint:fix # автоисправление
+npm run test # тесты jest
+npm run cy:run # тесты cypress
 ```
 
 ### Маршруты приложения
@@ -58,7 +61,7 @@ npm run lint:fix # автоисправление
 ### Быстрый старт разработки
 ```bash
 # 1) Установите зависимости
-npm ci
+npm i
 
 # 2) Создайте .env
 cp .env.example .env  # если есть, либо создайте вручную
