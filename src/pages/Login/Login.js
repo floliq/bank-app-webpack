@@ -33,12 +33,12 @@ const Login = (router) => {
 
   const errorText = el('p.auth__error.position-absolute.text-danger');
 
-  const authFieldTop = el('div.auth__field.position-relative.mb-4');
-  const authFieldMiddle = el('div.auth__field.position-relative.mb-4');
+  const authFieldTop = el('div.auth__field.mb-4.d-flex.align-items-center.justify-content-between.flex-column.flex-sm-row');
+  const authFieldMiddle = el('div.auth__field.mb-4.d-flex.align-items-center.justify-content-between.flex-column.flex-sm-row');
   const authFieldLast = el('div.auth__field.position-relative');
 
-  const loginLabel = el('label.auth__label.position-absolute', 'Логин');
-  const passwordLabel = el('label.auth__label.position-absolute', 'Пароль');
+  const loginLabel = el('label.auth__label', 'Логин');
+  const passwordLabel = el('label.auth__label', 'Пароль');
 
   const loginInput = Input({
     type: 'text',

@@ -2,8 +2,8 @@
 
 .auth {
   &__form {
-    width: 500px;
-    transform: translate(-50%, -100%);
+    max-width: 500px;
+    transform: translate(-50%, -75%);
     background-color: $light-gray;
     border-radius: 50px;
   }
@@ -20,14 +20,11 @@
   }
 
   &__group {
-    width: 300px;
     margin: 0 auto;
   }
 
   &__label {
-    top: 50%;
-    left: -65px;
-    transform: translateY(-50%);
+    margin-right: 18px;
     font-family: 'Ubuntu', sans-serif;
     font-weight: 500;
     font-size: 16px;
@@ -36,7 +33,23 @@
     color: $secondary;
   }
 
+  &__input {
+    width: 300px;
+  }
+
   &__btn .button-text {
     font-size: 14px;
+  }
+}
+
+@media (max-width: 576px) {
+  .auth {
+    &__form {
+      width: 90%;
+    }
+
+    &__input {
+      width: 100%;
+    }
   }
 }

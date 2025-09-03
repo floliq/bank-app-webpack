@@ -12,3 +12,11 @@
     padding: 0;
   }
 }
+
+@media (max-width: 1400px) {
+  .exchange {
+    &__currency {
+      width: 100% !important;
+    }
+  }
+}

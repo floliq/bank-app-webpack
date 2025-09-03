@@ -77,7 +77,7 @@ export const validateDecimal = (value) => {
 };
 
 const TransferForm = async (id, onUpdate) => {
-  const form = el('form.transfer-form.py-5.px-5.d-flex.flex-column');
+  const form = el('form.transfer-form.py-5.px-5.d-flex.flex-column.w-100');
   const title = el('h3.transfer-form__title.subtitle.mb-3', 'Новый перевод');
 
   const group = el('div.transfer-form__group.position-relative');
@@ -85,10 +85,10 @@ const TransferForm = async (id, onUpdate) => {
   const errorText = el('p.transfer-form__error.position-absolute.text-danger');
 
   const transferTop = el(
-    'div.transfer-form__field.mb-4.d-flex.align-items-center.justify-content-end'
+    'div.transfer-form__field.mb-4.d-flex.align-items-center.justify-content-center.justify-content-xl-end'
   );
   const transferMiddle = el(
-    'div.transfer-form__field.mb-4.d-flex.align-items-center.justify-content-end'
+    'div.transfer-form__field.mb-4.d-flex.align-items-center.justify-content-center.justify-content-xl-end'
   );
   const transferLast = el(
     'div.transfer-form__field.d-flex.justify-content-center'
@@ -107,6 +107,7 @@ const TransferForm = async (id, onUpdate) => {
     placeholder: 'Кошелек',
     id: 'transfer-form-account',
     search: true,
+    className: 'transfer-form__input'
   });
 
   const amountInput = Input({

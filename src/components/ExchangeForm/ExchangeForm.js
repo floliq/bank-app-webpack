@@ -49,7 +49,7 @@ const getRequestAnswer = (response) => {
 };
 
 const ExchangeForm = async (updateCurrencies) => {
-  const form = el('form.exchange.box.p-5');
+  const form = el('form.exchange.box.p-5.mb-4');
   const errorText = el('p.text-danger');
 
   try {
@@ -66,19 +66,19 @@ const ExchangeForm = async (updateCurrencies) => {
     const title = el('h3.exchange__title.subtitle.mb-3', 'Обмен валют');
 
     const row = el('div.row');
-    const colOne = el('div.col-9');
-    const colTwo = el('div.col-3');
+    const colOne = el('div.col-12.col-xxl-9');
+    const colTwo = el('div.col-12.col-xxl-3');
 
-    const currencies = el('div.exchange__currencies.d-flex.mb-3');
+    const currencies = el('div.exchange__currencies.d-flex.mb-3.flex-wrap.flex-lg-nowrap');
 
     const currencyOne = el(
-      'div.exchange__currency.d-flex.align-items-center.me-3.w-50'
+      'div.exchange__currency.d-flex.align-items-center.me-3.w-50.flex-column.flex-lg-row'
     );
     const currencyTwo = el(
-      'div.exchange__currency.d-flex.align-items-center.w-50'
+      'div.exchange__currency.d-flex.align-items-center.w-50.flex-column.flex-lg-row'
     );
     const currencyThree = el(
-      'div.exchange__currency.d-flex.align-items-center'
+      'div.exchange__currency.d-flex.align-items-center.mb-2.flex-column.flex-lg-row'
     );
 
     const fromLabel = el('label.echange__label.me-3', 'Из');

@@ -19,8 +19,8 @@ const Currencies = async () => {
   (async () => {
     try {
       const row = el('div.row');
-      const colOne = el('div.col-6');
-      const colTwo = el('div.col-6');
+      const colOne = el('div.col-12.col-lg-6');
+      const colTwo = el('div.col-12.col-lg-6');
 
       const initialResponse = await getCurrencies();
       let currentCurrencies = initialResponse.payload;

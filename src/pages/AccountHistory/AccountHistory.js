@@ -15,7 +15,7 @@ const AccountHistory = async (router, id) => {
   );
 
   const accountTop = el(
-    'div.account-page__top.mb-4.d-flex.justify-content-between.align-items-end'
+    'div.account-page__top.mb-4.d-flex.justify-content-between.flex-wrap.align-items-end'
   );
   const title = el('h2.title.account-page__title', 'Просмотр счёта');
   const backLink = LinkButton({
@@ -35,9 +35,9 @@ const AccountHistory = async (router, id) => {
       const data = response.payload;
 
       const header = el(
-        'div.account-page__header.d-flex.justify-content-between.align-items-end.mb-5'
+        'div.account-page__header.d-flex.justify-content-between.flex-wrap.align-items-end.mb-5'
       );
-      const number = el('h3.account-page_number', `№ ${id}`);
+      const number = el('h3.account-page_number.text-break', `№ ${id}`);
       const money = el('div.account-page__balance.d-flex');
       const balance = el(
         'p.account-page__balance',

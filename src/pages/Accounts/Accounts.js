@@ -19,8 +19,8 @@ const Accounts = (router) => {
 
   const page = el('div.container.accounts.py-5');
 
-  const pageTop = el('div.accounts__top.d-flex.justify-content-between.mb-5');
-  const pageMain = el('div.accounts__main.d-flex.align-items-center');
+  const pageTop = el('div.accounts__top.d-flex.flex-column.flex-lg-row.justify-content-between.mb-5');
+  const pageMain = el('div.accounts__main.d-flex.align-items-center.mb-2');
   const title = el('h2.title.accounts__title.me-5', 'Ваши счета');
 
   const filterSelect = new Select({
@@ -37,7 +37,7 @@ const Accounts = (router) => {
   const addBtn = Button({
     text: 'Создать новый счет',
     type: 'btn',
-    className: 'accounts__add',
+    className: 'accounts__add.d-flex.justify-content-center',
     icon: Plus,
   });
 

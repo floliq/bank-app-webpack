@@ -16,7 +16,7 @@ const AccountInfo = async (router, id) => {
   );
 
   const accountTop = el(
-    'div.account-page__top.mb-4.d-flex.justify-content-between.align-items-end'
+    'div.account-page__top.mb-4.d-flex.justify-content-between.align-items-end.flex-wrap'
   );
   const title = el('h2.title.account-page__title', 'Просмотр счёта');
   const backLink = LinkButton({
@@ -41,9 +41,9 @@ const AccountInfo = async (router, id) => {
       const data = response.payload;
 
       const header = el(
-        'div.account-page__header.d-flex.justify-content-between.align-items-end.mb-5'
+        'div.account-page__header.d-flex.justify-content-between.flex-wrap.align-items-center.mb-5'
       );
-      const number = el('h3.account-page_number', `№ ${id}`);
+      const number = el('h3.account-page_number.text-break', `№ ${id}`);
       const money = el('div.account-page__balance.d-flex');
       const balance = el(
         'p.account-page__balance',
@@ -53,8 +53,8 @@ const AccountInfo = async (router, id) => {
 
       const content = el('div.account__content');
       const row = el('div.row.mb-5');
-      const colOne = el('div.col-6.d-flex');
-      const colTwo = el('div.col-6');
+      const colOne = el('div.col-12.col-xl-6.d-flex.mb-4');
+      const colTwo = el('div.col-12.col-xl-6');
 
       const historyContainer = el('div');
 

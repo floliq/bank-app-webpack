@@ -4,7 +4,7 @@ import { formatDate } from '../../utils/formatDate';
 import LinkButton from '../../ui/LinkButton/LinkButton';
 
 const Account = (account, balance, date, router) => {
-  const card = el('div.accounts__account.col-4.gy-4');
+  const card = el('div.accounts__account.col-12.col-md-6.col-lg-4.gy-4');
 
   const accountContent = el('div.account.d-flex.flex-column.p-4');
 
