@@ -5,7 +5,7 @@ import { Input } from '../../ui/Input/Input';
 import { Button } from '../../ui/Button/Button';
 import Mail from '../../assets/images/mail.svg';
 import { getAccounts, transferToAccount } from '../../api/Accounts';
-import validator from 'validator';
+import { isFloat, matches } from 'validator';
 
 const getAccountNumbers = async (id) => {
   try {
@@ -71,8 +71,8 @@ const getRequestAnswer = (response) => {
 
 export const validateDecimal = (value) => {
   return (
-    validator.isFloat(value, { min: 0 }) &&
-    validator.matches(value, /^\d+(\.\d{2})?$/)
+    isFloat(value, { min: 0 }) &&
+    matches(value, /^\d+(\.\d{2})?$/)
   );
 };
 

@@ -4,12 +4,12 @@ import { buyCurrency, getAllCurrencies } from '../../api/Currencies';
 import Select from '../../ui/Select/Select';
 import { Input } from '../../ui/Input/Input';
 import { Button } from '../../ui/Button/Button';
-import validator from 'validator';
+import { isFloat, matches } from 'validator';
 
 export const validateDecimal = (value) => {
   return (
-    validator.isFloat(value, { min: 0 }) &&
-    validator.matches(value, /^\d+(\.\d{2})?$/)
+    isFloat(value, { min: 0 }) &&
+    matches(value, /^\d+(\.\d{2})?$/)
   );
 };
 

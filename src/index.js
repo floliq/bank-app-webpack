@@ -5,12 +5,6 @@ import './index.scss';
 import Navigo from 'navigo';
 import Header from './components/Header/Header';
 import { getToken } from './api/Auth';
-import AccountHistory from './pages/AccountHistory/AccountHistory';
-import Login from './pages/Login/Login';
-import Accounts from './pages/Accounts/Accounts';
-import AccountInfo from './pages/AccountInfo/AccountInfo';
-import Currencies from './pages/Currencies/Currencies';
-import ATMs from './pages/ATMs/ATMs';
 
 const router = new Navigo('/');
 const currentPath = window.location.pathname;
@@ -36,18 +30,21 @@ router.on('/', () => {
   }
 });
 
-router.on('/login', () => {
+router.on('/login', async () => {
+  const { default: Login } = await import('./pages/Login/Login');
   const page = Login(router);
   updateApp(page);
 });
 
 router.on('/accounts', async () => {
+  const { default: Accounts } = await import('./pages/Accounts/Accounts');
   const page = await Accounts(router);
   updateApp(page);
 });
 
 router.on('/accounts/:id', async ({ data }) => {
   if (getToken()) {
+    const { default: AccountInfo } = await import('./pages/AccountInfo/AccountInfo');
     const page = await AccountInfo(router, data.id);
     updateApp(page);
   } else {
@@ -57,6 +54,7 @@ router.on('/accounts/:id', async ({ data }) => {
 
 router.on('/accounts/:id/history', async ({ data }) => {
   if (getToken()) {
+    const { default: AccountHistory } = await import('./pages/AccountHistory/AccountHistory');
     const page = await AccountHistory(router, data.id);
     updateApp(page);
   } else {
@@ -65,14 +63,16 @@ router.on('/accounts/:id/history', async ({ data }) => {
 });
 
 router.on('/currencies', async () => {
+  const { default: Currencies } = await import('./pages/Currencies/Currencies');
   const page = await Currencies();
   updateApp(page);
-})
+});
 
 router.on('/atms', async () => {
+  const { default: ATMs } = await import('./pages/ATMs/ATMs');
   const page = await ATMs();
   updateApp(page);
-})
+});
 
 if (currentPath === '/') {
   if (getToken()) {
